@@ -51,6 +51,8 @@
             this.labelCompanyName = new System.Windows.Forms.Label();
             this.labelCustomerCode = new System.Windows.Forms.Label();
             this.buttonClose = new System.Windows.Forms.Button();
+            this.buttonNewCustomer = new System.Windows.Forms.Button();
+            this.buttonDeleteCustomer = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // labelCustomerData
@@ -59,6 +61,7 @@
             this.labelCustomerData.Name = "labelCustomerData";
             this.labelCustomerData.Size = new System.Drawing.Size(170, 143);
             this.labelCustomerData.TabIndex = 46;
+            this.labelCustomerData.Click += new System.EventHandler(this.labelCustomerData_Click);
             // 
             // labelCustomerLegend
             // 
@@ -74,7 +77,7 @@
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
             this.buttonSave.TabIndex = 44;
-            this.buttonSave.Text = "Save";
+            this.buttonSave.Text = "&Save";
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
@@ -85,7 +88,7 @@
             this.checkBoxCreditHold.Name = "checkBoxCreditHold";
             this.checkBoxCreditHold.Size = new System.Drawing.Size(75, 17);
             this.checkBoxCreditHold.TabIndex = 43;
-            this.checkBoxCreditHold.Text = "CreditHold";
+            this.checkBoxCreditHold.Text = "Credit&Hold";
             this.checkBoxCreditHold.UseVisualStyleBackColor = true;
             // 
             // textBoxNotes
@@ -238,15 +241,36 @@
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(75, 23);
             this.buttonClose.TabIndex = 47;
-            this.buttonClose.Text = "Close";
+            this.buttonClose.Text = "&Close";
             this.buttonClose.UseVisualStyleBackColor = true;
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
+            // 
+            // buttonNewCustomer
+            // 
+            this.buttonNewCustomer.Location = new System.Drawing.Point(304, 325);
+            this.buttonNewCustomer.Name = "buttonNewCustomer";
+            this.buttonNewCustomer.Size = new System.Drawing.Size(145, 23);
+            this.buttonNewCustomer.TabIndex = 48;
+            this.buttonNewCustomer.Text = "&New Customer";
+            this.buttonNewCustomer.UseVisualStyleBackColor = true;
+            this.buttonNewCustomer.Click += new System.EventHandler(this.buttonNewCustomer_Click);
+            // 
+            // buttonDeleteCustomer
+            // 
+            this.buttonDeleteCustomer.Location = new System.Drawing.Point(490, 325);
+            this.buttonDeleteCustomer.Name = "buttonDeleteCustomer";
+            this.buttonDeleteCustomer.Size = new System.Drawing.Size(75, 23);
+            this.buttonDeleteCustomer.TabIndex = 49;
+            this.buttonDeleteCustomer.Text = "&Delete Customer";
+            this.buttonDeleteCustomer.UseVisualStyleBackColor = true;
             // 
             // EditDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.buttonDeleteCustomer);
+            this.Controls.Add(this.buttonNewCustomer);
             this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.labelCustomerData);
             this.Controls.Add(this.labelCustomerLegend);
@@ -304,5 +328,7 @@
         private System.Windows.Forms.Label labelCompanyName;
         private System.Windows.Forms.Label labelCustomerCode;
         private System.Windows.Forms.Button buttonClose;
+        private System.Windows.Forms.Button buttonNewCustomer;
+        private System.Windows.Forms.Button buttonDeleteCustomer;
     }
 }

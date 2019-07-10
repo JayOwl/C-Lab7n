@@ -5,37 +5,30 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using COMP2614Assign07a.Business;
+//using COMP2614Assign07a.Common;
 
 namespace COMP2614Assign07a
 {
-    public class CustomerViewModel : INotifyPropertyChanged
+    class CustomerViewModel : ViewModelBase
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        private Customer customer;
 
         public CustomerViewModel()
         {
             
-            this.Customers = CustomerRepository.GetAllCustomers();
-            this.Customer = new Customer();
+            this.Customers = CustomerRepository.GetCustomers();
+            Customer = new Customer();
         }
 
-        private Customer customer;
 
         public Customer Customer
         {
-            get
-            {
-                return this.customer;
-            }
+            get { return customer; }
             set
             {
-                this.customer = value;
-                OnPropertyChanged();
+                customer = value;
+                OnPropertyChanged("Customer");
             }
         }
 
@@ -44,7 +37,7 @@ namespace COMP2614Assign07a
 
         public void SetDisplayCustomer(Customer customer)
         {
-            this.Customer = new Customer
+            Customer = new Customer
             {
                 CustomerCode = customer.CustomerCode,
                 CompanyName = customer.CompanyName,
@@ -62,7 +55,7 @@ namespace COMP2614Assign07a
         public Customer GetDisplayCustomer()
         {
             OnPropertyChanged("Customer");
-            return this.Customer;
+            return Customer;
         }
     }
 }

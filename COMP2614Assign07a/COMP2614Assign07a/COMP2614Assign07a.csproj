@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business\CustomerValidation.cs" />
     <Compile Include="Common\Customer.cs" />
     <Compile Include="Common\CustomerCollection.cs" />
     <Compile Include="Data\CustomerRepository.cs" />
@@ -64,6 +65,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModelBase.cs" />
     <EmbeddedResource Include="EditDialog.resx">
       <DependentUpon>EditDialog.cs</DependentUpon>
     </EmbeddedResource>
