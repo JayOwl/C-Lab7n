@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace COMP2614Assign07a
 {
-    class Customer
+    public class Customer
     {
         public string CustomerCode { get; set; }
 

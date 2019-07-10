@@ -29,18 +29,7 @@ namespace COMP2614Assign07a
         private void SetBindings()
         {
 
-            textBoxCustomerCode.DataBindings.Add("Text", customerVM, "Customer.CustomerCode", false, DataSourceUpdateMode.OnValidation, "");
-            textBoxCompanyName.DataBindings.Add("Text", customerVM, "Customer.CompanyName", false, DataSourceUpdateMode.OnValidation, "");
-            textBoxAddress.DataBindings.Add("Text", customerVM, "Customer.Address", false, DataSourceUpdateMode.OnValidation, "");
-            textBoxAddress2.DataBindings.Add("Text", customerVM, "Customer.Address2", false, DataSourceUpdateMode.OnValidation, "");
-            textBoxCity.DataBindings.Add("Text", customerVM, "Customer.City", false, DataSourceUpdateMode.OnValidation, "");
-            textBoxProvince.DataBindings.Add("Text", customerVM, "Customer.Province", false, DataSourceUpdateMode.OnValidation, "");
-            textBoxPostalCode.DataBindings.Add("Text", customerVM, "Customer.PostalCode", false, DataSourceUpdateMode.OnValidation, "");
-            textBoxNotes.DataBindings.Add("Text", customerVM, "Customer.Notes", false, DataSourceUpdateMode.OnValidation, "");
 
-            textBoxYTDSales.DataBindings.Add("Text", customerVM, "Customer.YTDSales", true, DataSourceUpdateMode.OnValidation, "0.00", "#,##0.00;(#,##0.00);0.00");
-                       
-            checkBoxCreditHold.DataBindings.Add("Checked", customerVM, "Customer.CreditHold");
 
             dataGridViewCustomers.AutoGenerateColumns = false;
             dataGridViewCustomers.DataSource = customerVM.Customers;
@@ -148,9 +137,7 @@ namespace COMP2614Assign07a
             Customer customer = customerVM.Customers[index];
             customerVM.SetDisplayCustomer(customer);
 
-            labelCustomerLegend.Text = string.Empty;
-            labelCustomerData.Text = string.Empty;
-            labelProvince.Text = string.Empty;
+     
 
         }
 
@@ -162,32 +149,32 @@ namespace COMP2614Assign07a
             customerVM.Customers[index] = customer;
             customerVM.Customers.ResetItem(index);
 
-            string outputLegend = string.Format("{0}\r\n{1}\r\n{2}\r\n{3}\r\n{4}\r\n{5}\r\n{6}\r\n{7}\r\n{8}\r\n{9}\r\n"
-                                         , "CustomerCode:"
-                                         , "CompanyName:"
-                                         , "Address:"
-                                         , "Address2:"
-                                         , "City:"
-                                         , "Province:"
-                                         , "PostalCode:"
-                                         , "YTDSales:"
-                                         , "Notes:"
-                                         , "CreditHold:");
+            //string outputLegend = string.Format("{0}\r\n{1}\r\n{2}\r\n{3}\r\n{4}\r\n{5}\r\n{6}\r\n{7}\r\n{8}\r\n{9}\r\n"
+            //                             , "CustomerCode:"
+            //                             , "CompanyName:"
+            //                             , "Address:"
+            //                             , "Address2:"
+            //                             , "City:"
+            //                             , "Province:"
+            //                             , "PostalCode:"
+            //                             , "YTDSales:"
+            //                             , "Notes:"
+            //                             , "CreditHold:");
 
-            string outputData = string.Format("{0}\r\n{1}\r\n{2}\r\n{3}\r\n{4}\r\n{5}\r\n{6}\r\n{7}\r\n{8}\r\n{9}\r\n"
-                             , customer.CustomerCode
-                             , customer.CompanyName
-                             , customer.Address
-                             , customer.Address2
-                             , customer.City
-                             , customer.Province
-                             , customer.PostalCode
-                             , customer.YTDSales
-                             , customer.Notes
-                             , customer.CreditHold);
+            //string outputData = string.Format("{0}\r\n{1}\r\n{2}\r\n{3}\r\n{4}\r\n{5}\r\n{6}\r\n{7}\r\n{8}\r\n{9}\r\n"
+            //                 , customer.CustomerCode
+            //                 , customer.CompanyName
+            //                 , customer.Address
+            //                 , customer.Address2
+            //                 , customer.City
+            //                 , customer.Province
+            //                 , customer.PostalCode
+            //                 , customer.YTDSales
+            //                 , customer.Notes
+            //                 , customer.CreditHold);
 
-            labelCustomerLegend.Text = outputLegend;
-            labelCustomerData.Text = outputData;
+            //labelCustomerLegend.Text = outputLegend;
+            //labelCustomerData.Text = outputData;
         }
 
         private void Label1_Click(object sender, EventArgs e)
@@ -201,6 +188,25 @@ namespace COMP2614Assign07a
         private void LabelCustomerData_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void buttonEditRecord_Click(object sender, EventArgs e)
+        {
+            int index = dataGridViewCustomers.CurrentRow.Index;
+            Customer customer = customerVM.GetDisplayCustomer();
+
+
+            EditDialog dialog = new EditDialog();
+
+            dialog.Customer = customer;
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                customer = dialog.Customer;
+                customerVM.Customers[index] = customer;
+                customerVM.Customers.ResetItem(index);
+            }
+            dialog.Dispose();
         }
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace COMP2614Assign07a
 {
-    class CustomerViewModel : INotifyPropertyChanged
+    public class CustomerViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace COMP2614Assign07a
 {
-    class CustomerRepository
+    public class CustomerRepository
     {
         private static readonly string connString = @"Server=tcp:skeena.database.windows.net,1433; 
                                                       Initial Catalog=comp2614;
