@@ -18,6 +18,22 @@ namespace COMP2614Assign07a
                                                       TrustServerCertificate=False;
                                                       Connection Timeout=30;";
 
+        private static readonly string customerTableName = "Client838629";
+
+
+        //public static int AddCustomer(Customer customer)
+        //{
+        //    int rowsAffected;
+
+        //    using (SqlConnection conn = new SqlConnection(connString))
+        //    {
+
+
+        //    }
+
+        //}
+
+
         public static CustomerCollection GetAllCustomers()
         {
 
@@ -26,7 +42,7 @@ namespace COMP2614Assign07a
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 //string query = $"SELECT CustomerCode, CompanyName, Address, City, Province, PostalCode, CreditHold From Customer";
-                string query = $"SELECT ClientCode, CompanyName, Address1, Address2, City, Province, PostalCode, YTDSales, CreditHold, Notes From Client123456";
+                string query = $"SELECT ClientCode, CompanyName, Address1, Address2, City, Province, PostalCode, YTDSales, CreditHold, Notes From Client838629";
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.CommandType = CommandType.Text;

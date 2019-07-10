@@ -46,9 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Customer.cs" />
-    <Compile Include="CustomerCollection.cs" />
-    <Compile Include="CustomerRepository.cs" />
+    <Compile Include="Common\Customer.cs" />
+    <Compile Include="Common\CustomerCollection.cs" />
+    <Compile Include="Data\CustomerRepository.cs" />
     <Compile Include="CustomerViewModel.cs" />
     <Compile Include="EditDialog.cs">
       <SubType>Form</SubType>
