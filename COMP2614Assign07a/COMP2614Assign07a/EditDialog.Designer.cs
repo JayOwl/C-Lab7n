@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this.labelCustomerData = new System.Windows.Forms.Label();
             this.labelCustomerLegend = new System.Windows.Forms.Label();
-            this.buttonSave = new System.Windows.Forms.Button();
             this.checkBoxCreditHold = new System.Windows.Forms.CheckBox();
             this.textBoxNotes = new System.Windows.Forms.TextBox();
             this.textBoxYTDSales = new System.Windows.Forms.TextBox();
@@ -53,8 +52,9 @@
             this.labelCustomerCode = new System.Windows.Forms.Label();
             this.buttonClose = new System.Windows.Forms.Button();
             this.buttonNewCustomer = new System.Windows.Forms.Button();
-            this.buttonDeleteCustomer = new System.Windows.Forms.Button();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.buttonSave = new System.Windows.Forms.Button();
+            this.buttonDeleteCustomer = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
@@ -73,16 +73,7 @@
             this.labelCustomerLegend.Size = new System.Drawing.Size(93, 133);
             this.labelCustomerLegend.TabIndex = 45;
             this.labelCustomerLegend.Text = "1\r\n2\r\n3\r\n4\r\n5\r\n6\r\n7\r\n8\r\n9\r\n10";
-            // 
-            // buttonSave
-            // 
-            this.buttonSave.Location = new System.Drawing.Point(304, 372);
-            this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(75, 23);
-            this.buttonSave.TabIndex = 44;
-            this.buttonSave.Text = "&Save";
-            this.buttonSave.UseVisualStyleBackColor = true;
-            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
+            this.labelCustomerLegend.Click += new System.EventHandler(this.LabelCustomerLegend_Click);
             // 
             // checkBoxCreditHold
             // 
@@ -258,19 +249,29 @@
             this.buttonNewCustomer.UseVisualStyleBackColor = true;
             this.buttonNewCustomer.Click += new System.EventHandler(this.buttonNewCustomer_Click);
             // 
-            // buttonDeleteCustomer
-            // 
-            this.buttonDeleteCustomer.Location = new System.Drawing.Point(490, 325);
-            this.buttonDeleteCustomer.Name = "buttonDeleteCustomer";
-            this.buttonDeleteCustomer.Size = new System.Drawing.Size(75, 23);
-            this.buttonDeleteCustomer.TabIndex = 49;
-            this.buttonDeleteCustomer.Text = "&Delete Customer";
-            this.buttonDeleteCustomer.UseVisualStyleBackColor = true;
-            this.buttonDeleteCustomer.Click += new System.EventHandler(this.buttonDeleteCustomer_Click);
-            // 
             // errorProvider
             // 
             this.errorProvider.ContainerControl = this;
+            // 
+            // buttonSave
+            // 
+            this.buttonSave.Location = new System.Drawing.Point(304, 372);
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.Size = new System.Drawing.Size(75, 23);
+            this.buttonSave.TabIndex = 44;
+            this.buttonSave.Text = "&Save";
+            this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
+            // 
+            // buttonDeleteCustomer
+            // 
+            this.buttonDeleteCustomer.Location = new System.Drawing.Point(469, 325);
+            this.buttonDeleteCustomer.Name = "buttonDeleteCustomer";
+            this.buttonDeleteCustomer.Size = new System.Drawing.Size(75, 23);
+            this.buttonDeleteCustomer.TabIndex = 51;
+            this.buttonDeleteCustomer.Text = "&Delete Customer";
+            this.buttonDeleteCustomer.UseVisualStyleBackColor = true;
+            this.buttonDeleteCustomer.Click += new System.EventHandler(this.ButtonDeleteCustomer_Click_1);
             // 
             // EditDialog
             // 
@@ -316,7 +317,6 @@
 
         private System.Windows.Forms.Label labelCustomerData;
         private System.Windows.Forms.Label labelCustomerLegend;
-        private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.CheckBox checkBoxCreditHold;
         private System.Windows.Forms.TextBox textBoxNotes;
         private System.Windows.Forms.TextBox textBoxYTDSales;
@@ -338,7 +338,8 @@
         private System.Windows.Forms.Label labelCustomerCode;
         private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.Button buttonNewCustomer;
-        private System.Windows.Forms.Button buttonDeleteCustomer;
         private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.Button buttonSave;
+        private System.Windows.Forms.Button buttonDeleteCustomer;
     }
 }

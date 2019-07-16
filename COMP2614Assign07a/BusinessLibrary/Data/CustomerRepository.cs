@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using BusinessLibrary.Business;
 using BusinessLibrary.Common;
+using Microsoft.Build.Tasks;
+using System.Windows.Forms;
 
 namespace BusinessLibrary.Data
 {
@@ -38,17 +40,71 @@ namespace BusinessLibrary.Data
                     cmd.CommandType = CommandType.Text;
                     cmd.CommandText = query;
                     cmd.Connection = conn;
+                   
+                    cmd.Parameters.AddWithValue("@clientcode", customer.CustomerCode);                 
 
-                    cmd.Parameters.AddWithValue("@clientcode", customer.CustomerCode);
-                    cmd.Parameters.AddWithValue("@companyname", customer.CompanyName);
-                    cmd.Parameters.AddWithValue("@address1", customer.Address);
-                    cmd.Parameters.AddWithValue("@address2", customer.Address2);
-                    cmd.Parameters.AddWithValue("@city", customer.City);
-                    cmd.Parameters.AddWithValue("@province", customer.Province);
-                    cmd.Parameters.AddWithValue("@ytdsales", customer.YTDSales);
+                    if (customer.CompanyName != null)
+                    {
+                        cmd.Parameters.AddWithValue("@companyname", customer.CompanyName);
+                    }
+                    else
+                    {
+                        // cmd.Parameters.AddWithValue("@companyname", "");
+
+                        throw new ArgumentNullException("Company Cannot be null");
+                        
+                        //MessageBox.Show(CustomerValidation.ErrorMessage, "This cannot be empty", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                      // errorProvider.SetValue(); 
+                    }
+
+                    if (customer.Address != null)
+                    {
+                        cmd.Parameters.AddWithValue("@address1", customer.Address);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@address1", DBNull.Value);
+                    }
+
+
+                    if (customer.Address2 != null)
+                    {
+                        cmd.Parameters.AddWithValue("@address2", customer.Address2);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@address2", DBNull.Value);
+                    }
+
+                    if (customer.City != null)
+                    {
+                        cmd.Parameters.AddWithValue("@city", customer.City);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@city", DBNull.Value);
+                    }
+
+                    if (customer.Province != null)
+                    {
+                        cmd.Parameters.AddWithValue("@province", customer.Province);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@province", DBNull.Value);
+                    }
+                    
+                    cmd.Parameters.AddWithValue("@ytdsales", customer.YTDSales);      
                     cmd.Parameters.AddWithValue("@credithold", customer.CreditHold);
-                    cmd.Parameters.AddWithValue("@postalcode", customer.PostalCode);
 
+                    if (customer.PostalCode != null)
+                    {
+                        cmd.Parameters.AddWithValue("@postalcode", customer.PostalCode);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@postalcode", DBNull.Value);
+                    }                  
 
                     if (customer.Notes != null)
                     {
@@ -62,10 +118,10 @@ namespace BusinessLibrary.Data
                     conn.Open();
 
                     rowsAffected = cmd.ExecuteNonQuery();
-
+                     return rowsAffected;
                 }
             }
-            return rowsAffected;
+           
         }
 
         public static int UpdateCustomer(Customer customer)

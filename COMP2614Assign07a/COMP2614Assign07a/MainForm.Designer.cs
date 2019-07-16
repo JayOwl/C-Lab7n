@@ -44,7 +44,7 @@
             // 
             // buttonEditRecord
             // 
-            this.buttonEditRecord.Location = new System.Drawing.Point(875, 395);
+            this.buttonEditRecord.Location = new System.Drawing.Point(775, 395);
             this.buttonEditRecord.Name = "buttonEditRecord";
             this.buttonEditRecord.Size = new System.Drawing.Size(75, 23);
             this.buttonEditRecord.TabIndex = 1;

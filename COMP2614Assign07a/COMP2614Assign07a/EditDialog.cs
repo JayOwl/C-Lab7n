@@ -67,92 +67,112 @@ namespace COMP2614Assign07a
         {
 
             // get the customer from the database using the clientcode
+           
+     
 
-            bool isExistedCustomer = CustomerRepository.VerifyIfCustomerExist(CustomerVM.Customer.CustomerCode);
-
-            if(isExistedCustomer)
-            {
-                CustomerRepository.UpdateCustomer(CustomerVM.Customer);
-                MessageBox.Show($"Customer {CustomerVM.Customer.CustomerCode} has been updated.");
-            }
-            else
-            {
-                CustomerRepository.AddCustomer(CustomerVM.Customer);
-                MessageBox.Show($"Customer {CustomerVM.Customer.CustomerCode} has been created.");
-            }
-
-            int customerCodeStringLength = CustomerVM.Customer.CustomerCode.Length;
-            int customerCompanyNameStringLength = CustomerVM.Customer.CompanyName.Length;
-            int customerAddressStringLength = CustomerVM.Customer.Address.Length;
-            int customerAddress2StringLength = CustomerVM.Customer.Address2.Length;
-            int customerCityStringLength = CustomerVM.Customer.City.Length;
-            int customerProvinceStringLength = CustomerVM.Customer.Province.Length;
-            int customerPostalCodeStringLength = CustomerVM.Customer.PostalCode.Length;
+            int? customerCodeStringLength = CustomerVM.Customer.CustomerCode?.Length;
+            int? customerCompanyNameStringLength = CustomerVM.Customer.CompanyName?.Length;
+            int? customerAddressStringLength = CustomerVM.Customer.Address?.Length;
+            int? customerAddress2StringLength = CustomerVM.Customer.Address2?.Length;
+            int? customerCityStringLength = CustomerVM.Customer.City?.Length;
+            int? customerProvinceStringLength = CustomerVM.Customer.Province?.Length;
+            int? customerPostalCodeStringLength = CustomerVM.Customer.PostalCode?.Length;
             //int customerYTDSalesStringLength = CustomerVM.Customer.YTDSales.Length;
             //int customerPostalCodeStringLength = CustomerVM.Customer.PostalCode.Length;
 
 
+            try
+            {
+                if (customerCodeStringLength.GetValueOrDefault(0) < 5)
+                {
+                    errorProvider.SetError(buttonSave, "Validate");
+                    MessageBox.Show(CustomerValidation.ErrorMessage, "Customer Code needs to be longer has been updated.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+
+                if (customerCompanyNameStringLength <= 0)
+                {
+                    errorProvider.SetError(buttonSave, "Validate");
+                    MessageBox.Show(CustomerValidation.ErrorMessage, "Company Name needs to be longer.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }
+
+                if (customerAddressStringLength < 4)
+                {
+                    errorProvider.SetError(buttonSave, "Validate");
+                }
+                else
+                {
+                    MessageBox.Show(CustomerValidation.ErrorMessage, "Address needs to be long.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }
+                if (customerAddress2StringLength < 2)
+                {
+                    errorProvider.SetError(buttonSave, "Validate");
+                }
+                else
+                {
+                    MessageBox.Show(CustomerValidation.ErrorMessage, "Address2 needs to be long.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }
+                if (customerCityStringLength < 3)
+                {
+                    errorProvider.SetError(buttonSave, "Validate");
+                }
+                else
+                {
+                    MessageBox.Show(CustomerValidation.ErrorMessage, "City needs to be longer", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                if (customerProvinceStringLength < 2)
+                {
+                    errorProvider.SetError(buttonSave, "Validate");
+                }
+                else
+                {
+                    MessageBox.Show(CustomerValidation.ErrorMessage, "Province needs to be longer", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                if (customerPostalCodeStringLength < 8)
+                {
+                    errorProvider.SetError(buttonSave, "Validate");
+                }
+                else
+                {
+                    MessageBox.Show(CustomerValidation.ErrorMessage, "Customer postal code needs to be longer", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                bool isExistedCustomer = CustomerRepository.VerifyIfCustomerExist(CustomerVM.Customer.CustomerCode);
+
+                if (isExistedCustomer)
+                {
+                    CustomerRepository.UpdateCustomer(CustomerVM.Customer);
+                    MessageBox.Show($"Customer {CustomerVM.Customer.CustomerCode} has been updated.");
+                }
+                else
+                {
+                    CustomerRepository.AddCustomer(CustomerVM.Customer);
+                    MessageBox.Show($"Customer {CustomerVM.Customer.CustomerCode} has been created.");
+                }
+
+            }
 
 
 
-            if (customerCodeStringLength < 6)
+            catch (SqlException ex)
             {
-                errorProvider.SetError(buttonSave, "Validate");             
-            }
-            else
-            {
-                MessageBox.Show(CustomerValidation.ErrorMessage, "Customer Code needs to be longer has been updated.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "DB Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            if (customerCompanyNameStringLength > 0)
+            catch (Exception ex)
             {
-                errorProvider.SetError(buttonSave, "Validate");
-            }
-            else
-            {
-                MessageBox.Show(CustomerValidation.ErrorMessage, "Customer Code needs to be longer has been updated.", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-            }
-            if (customerAddressStringLength > 8)
-            {
-                errorProvider.SetError(buttonSave, "Validate");
-            }
-            else
-            {
-                MessageBox.Show(CustomerValidation.ErrorMessage, "Customer Code needs to be longer has been updated.", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-            }
-            if (customerAddress2StringLength > 8)
-            {
-                errorProvider.SetError(buttonSave, "Validate");
-            }
-            else
-            {
-                MessageBox.Show(CustomerValidation.ErrorMessage, "Customer Code needs to be longer has been updated.", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-            }
-            if (customerCityStringLength > 8)
-            {
-                errorProvider.SetError(buttonSave, "Validate");
-            }
-            else
-            {
-                MessageBox.Show(CustomerValidation.ErrorMessage, "Customer Code needs to be longer has been updated.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Processing Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            if (customerPostalCodeStringLength > 8)
-            {
-                errorProvider.SetError(buttonSave, "Validate");
-            }
-            else
-            {
-                MessageBox.Show(CustomerValidation.ErrorMessage, "Customer Code needs to be longer has been updated.", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-            }
-
-                DialogResult = DialogResult.OK;
-
+            DialogResult = DialogResult.OK;
             this.Dispose();
+
+
         }
 
         private void buttonClose_Click(object sender, EventArgs e)
@@ -172,7 +192,13 @@ namespace COMP2614Assign07a
 
         }
 
-        private void buttonDeleteCustomer_Click(object sender, EventArgs e)
+  
+        private void LabelCustomerLegend_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ButtonDeleteCustomer_Click_1(object sender, EventArgs e)
         {
             if (CustomerRepository.DeleteProduct(CustomerVM.Customer))
             {

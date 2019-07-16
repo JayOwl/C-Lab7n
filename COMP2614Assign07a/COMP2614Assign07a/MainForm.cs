@@ -10,13 +10,14 @@ using System.Windows.Forms;
 using BusinessLibrary.Business;
 using BusinessLibrary.Common;
 using BusinessLibrary;
+using BusinessLibrary.Data;
 
 namespace COMP2614Assign07a
 {
     public partial class MainForm : Form
     {
         private CustomerViewModel customerVM;
-
+     
         public MainForm()
         {
             InitializeComponent();
@@ -211,5 +212,6 @@ namespace COMP2614Assign07a
                 setupDataGridView();
             }
         }
+
     }
 }
