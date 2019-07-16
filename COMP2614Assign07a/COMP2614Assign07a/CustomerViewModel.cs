@@ -5,19 +5,20 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using COMP2614Assign07a.Business;
-//using COMP2614Assign07a.Common;
+using BusinessLibrary.Business;
+using BusinessLibrary.Common;
+using BusinessLibrary.Data;
 
 namespace COMP2614Assign07a
 {
-    class CustomerViewModel : ViewModelBase
+    public class CustomerViewModel : ViewModelBase
     {
         private Customer customer;
 
         public CustomerViewModel()
         {
             
-            this.Customers = CustomerRepository.GetCustomers();
+            this.Customers = CustomerValidation.GetCustomers();
             Customer = new Customer();
         }
 

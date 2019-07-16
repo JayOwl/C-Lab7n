@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BusinessLibrary.Business;
+using BusinessLibrary.Common;
+using BusinessLibrary;
 
 namespace COMP2614Assign07a
 {
@@ -22,11 +25,11 @@ namespace COMP2614Assign07a
         private void MainForm_Load(object sender, EventArgs e)
         {
             customerVM = new CustomerViewModel();
-            SetBindings();
+            setBindings();
             setupDataGridView();
         }
 
-        private void SetBindings()
+        private void setBindings()
         {
 
 
@@ -132,13 +135,17 @@ namespace COMP2614Assign07a
 
         private void dataGridViewCustomers_SelectionChanged(object sender, EventArgs e)
         {
-            int index = dataGridViewCustomers.CurrentRow.Index;
+            try
+            {
+                int index = dataGridViewCustomers.CurrentRow.Index;
 
-            Customer customer = customerVM.Customers[index];
-            customerVM.SetDisplayCustomer(customer);
-
-     
-
+                Customer customer = customerVM.Customers[index];
+                customerVM.SetDisplayCustomer(customer);
+            }
+            catch (Exception)
+            {
+                
+            }
         }
 
         private void Button1_Click(object sender, EventArgs e)
@@ -194,19 +201,15 @@ namespace COMP2614Assign07a
         {
             int index = dataGridViewCustomers.CurrentRow.Index;
             Customer customer = customerVM.GetDisplayCustomer();
-
-
+            
             EditDialog dialog = new EditDialog();
-
-            dialog.Customer = customer;
-
-            if (dialog.ShowDialog() == DialogResult.OK)
+            dialog.CustomerVM.Customer = customer;
+            if(dialog.ShowDialog() == DialogResult.OK)
             {
-                customer = dialog.Customer;
-                customerVM.Customers[index] = customer;
-                customerVM.Customers.ResetItem(index);
+                customerVM = new CustomerViewModel();
+                setBindings();
+                setupDataGridView();
             }
-            dialog.Dispose();
         }
     }
 }

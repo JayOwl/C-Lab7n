@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BusinessLibrary.Business;
+using BusinessLibrary.Common;
+using BusinessLibrary.Data;
 
-namespace COMP2614Assign07a.Business
+namespace BusinessLibrary.Business
 {
-    class CustomerValidation
+    public class CustomerValidation
     {
         private static List<string> errors;
 

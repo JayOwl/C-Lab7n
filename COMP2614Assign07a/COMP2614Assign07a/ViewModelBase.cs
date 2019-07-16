@@ -5,12 +5,12 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using COMP2614Assign07a.Business;
-//using COMP2614Assign07a.Common;
+using BusinessLibrary.Business;
+using BusinessLibrary.Common;
 
 namespace COMP2614Assign07a
 {
-    class ViewModelBase : INotifyPropertyChanged
+    public class ViewModelBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

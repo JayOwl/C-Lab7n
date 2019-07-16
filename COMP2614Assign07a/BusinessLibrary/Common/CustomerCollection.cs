@@ -4,8 +4,9 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BusinessLibrary.Business;
 
-namespace COMP2614Assign07a
+namespace BusinessLibrary.Common
 {
     public class CustomerCollection : BindingList<Customer>
     {

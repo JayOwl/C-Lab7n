@@ -5,8 +5,10 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BusinessLibrary.Business;
+using BusinessLibrary.Common;
 
-namespace COMP2614Assign07a
+namespace BusinessLibrary.Data
 {
     public class CustomerRepository
     {
@@ -28,8 +30,8 @@ namespace COMP2614Assign07a
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 string query = $@"INSERT INTO {customerTableName}
-                                ClientCode, CompanyName, Address1, Address2, City, Province, PostalCode, YTDSales, CreditHold, Notes)
-                                VALUES @clientcode, @companyname, @address1, @address2, @city, @province, @postalcode, @ytdsales, @credithold, @notes";
+                                (ClientCode, CompanyName, Address1, Address2, City, Province, PostalCode, YTDSales, CreditHold, Notes)
+                                VALUES (@clientcode, @companyname, @address1, @address2, @city, @province, @postalcode, @ytdsales, @credithold, @notes)";
 
                 using (SqlCommand cmd = new SqlCommand())
                 {
@@ -45,8 +47,18 @@ namespace COMP2614Assign07a
                     cmd.Parameters.AddWithValue("@province", customer.Province);
                     cmd.Parameters.AddWithValue("@ytdsales", customer.YTDSales);
                     cmd.Parameters.AddWithValue("@credithold", customer.CreditHold);
-                    cmd.Parameters.AddWithValue("@notes", customer.Notes);
+                    cmd.Parameters.AddWithValue("@postalcode", customer.PostalCode);
 
+
+                    if (customer.Notes != null)
+                    {
+                        cmd.Parameters.AddWithValue("@notes", customer.Notes);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@notes", DBNull.Value);
+                    }
+                    
                     conn.Open();
 
                     rowsAffected = cmd.ExecuteNonQuery();
@@ -82,7 +94,7 @@ namespace COMP2614Assign07a
                     cmd.CommandText = query;
                     cmd.Connection = conn;
 
-                    cmd.Parameters.AddWithValue("@clientcode", customer.CustomerCode);
+                    cmd.Parameters.AddWithValue("@customerCode", customer.CustomerCode);
                     cmd.Parameters.AddWithValue("@companyname", customer.CompanyName);
                     cmd.Parameters.AddWithValue("@address1", customer.Address);
                     cmd.Parameters.AddWithValue("@address2", customer.Address2);
@@ -90,6 +102,7 @@ namespace COMP2614Assign07a
                     cmd.Parameters.AddWithValue("@province", customer.Province);
                     cmd.Parameters.AddWithValue("@ytdsales", customer.YTDSales);
                     cmd.Parameters.AddWithValue("@credithold", customer.CreditHold);
+                    cmd.Parameters.AddWithValue("@postalcode", customer.PostalCode);
                     cmd.Parameters.AddWithValue("@notes", customer.Notes);
 
                     conn.Open();
@@ -101,6 +114,31 @@ namespace COMP2614Assign07a
             return rowsAffected;
         }
 
+        public static bool VerifyIfCustomerExist(string clientCode)
+        {
+            string query = $@"SELECT ClientCode, CompanyName, Address1, Address2, City, Province, PostalCode, YTDSales, CreditHold, Notes
+                                FROM {customerTableName}
+                                where ClientCode = '{clientCode}'";
+
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = query;
+                    cmd.Connection = conn;
+                    conn.Open();
+
+                    var reader = cmd.ExecuteReader();
+
+                    var existed = reader.HasRows;
+
+                    conn.Close();
+                    return existed;
+                }
+            }
+        }
+    
         public static CustomerCollection GetCustomers()
         {
             CustomerCollection customers;
@@ -122,16 +160,16 @@ namespace COMP2614Assign07a
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        string customerCode = null;
-                        string companyName = null;
-                        string address = null;
-                        string address2 = null;
-                        string city = null;
-                        string province = null;
-                        string postalCode = null;
-                        decimal ytdSales = 0.0m;
-                        bool creditHold = false;
-                        string notes = null;
+                        string customerCode;
+                        string companyName;
+                        string address;
+                        string address2;
+                        string city;
+                        string province;
+                        string postalCode;
+                        decimal ytdSales;
+                        bool creditHold;
+                        string notes;
 
                         while (reader.Read())
                         {
@@ -139,49 +177,90 @@ namespace COMP2614Assign07a
                             {
                                 customerCode = reader["ClientCode"] as string;
                             }
+                            else
+                            {
+                                customerCode = null;
+                            }
 
                             if (!reader.IsDBNull(1))
                             {
                                 companyName = reader["CompanyName"] as string;
+                            }
+                            else
+                            {
+                                companyName = null;
                             }
 
                             if (!reader.IsDBNull(2))
                             {
                                 address = reader["Address1"] as string;
                             }
+                            else
+                            {
+                                address = null;
+                            }
 
                             if (!reader.IsDBNull(3))
                             {
                                 address2 = reader["Address2"] as string;
+                            }
+                            else
+                            {
+                                address2 = null;
                             }
 
                             if (!reader.IsDBNull(4))
                             {
                                 city = reader["City"] as string;
                             }
+                            else
+                            {
+                                city = null;
+                            }
 
                             if (!reader.IsDBNull(5))
                             {
                                 province = reader["Province"] as string;
+                            }
+                            else
+                            {
+                                province = null;
                             }
 
                             if (!reader.IsDBNull(6))
                             {
                                 postalCode = reader["PostalCode"] as string;
                             }
+                            else
+                            {
+                                postalCode = null;
+                            }
+
                             if (!reader.IsDBNull(7))
                             {
                                 ytdSales = (decimal)reader["YTDSales"];
+                            }
+                            else
+                            {
+                                ytdSales = 0.0m;
                             }
 
                             if (!reader.IsDBNull(8))
                             {
                                 creditHold = (bool)reader["CreditHold"];
                             }
+                            else
+                            {
+                                creditHold = false;
+                            }
 
                             if (!reader.IsDBNull(9))
                             {
                                 notes = reader["Notes"] as string;
+                            }
+                            else
+                            {
+                                notes = null;
                             }
 
                             customers.Add(new Customer
@@ -208,14 +287,14 @@ namespace COMP2614Assign07a
         }
 
 
-        public static int DeleteProduct(Customer customer)
+        public static bool DeleteProduct(Customer customer)
         {
             int rowsAffected;
 
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 string query = $@"DELETE {customerTableName}
-                                WHERE CustomerCode = @customerCode";
+                                WHERE ClientCode = @customerCode";
 
                 using (SqlCommand cmd = new SqlCommand())
                 {
@@ -227,9 +306,10 @@ namespace COMP2614Assign07a
                     conn.Open();
 
                     rowsAffected = cmd.ExecuteNonQuery();
+
+                    return rowsAffected > 0;
                 }
             }
-            return rowsAffected;
         }
 
 

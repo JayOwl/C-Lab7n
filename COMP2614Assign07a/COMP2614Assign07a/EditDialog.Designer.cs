@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.labelCustomerData = new System.Windows.Forms.Label();
             this.labelCustomerLegend = new System.Windows.Forms.Label();
             this.buttonSave = new System.Windows.Forms.Button();
@@ -53,6 +54,8 @@
             this.buttonClose = new System.Windows.Forms.Button();
             this.buttonNewCustomer = new System.Windows.Forms.Button();
             this.buttonDeleteCustomer = new System.Windows.Forms.Button();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // labelCustomerData
@@ -263,6 +266,11 @@
             this.buttonDeleteCustomer.TabIndex = 49;
             this.buttonDeleteCustomer.Text = "&Delete Customer";
             this.buttonDeleteCustomer.UseVisualStyleBackColor = true;
+            this.buttonDeleteCustomer.Click += new System.EventHandler(this.buttonDeleteCustomer_Click);
+            // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
             // 
             // EditDialog
             // 
@@ -298,6 +306,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EditDialog";
             this.Load += new System.EventHandler(this.EditDialog_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -330,5 +339,6 @@
         private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.Button buttonNewCustomer;
         private System.Windows.Forms.Button buttonDeleteCustomer;
+        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }

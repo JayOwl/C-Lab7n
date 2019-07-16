@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BusinessLibrary">
+      <HintPath>..\BusinessLibrary\bin\Debug\BusinessLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,10 +49,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Business\CustomerValidation.cs" />
-    <Compile Include="Common\Customer.cs" />
-    <Compile Include="Common\CustomerCollection.cs" />
-    <Compile Include="Data\CustomerRepository.cs" />
     <Compile Include="CustomerViewModel.cs" />
     <Compile Include="EditDialog.cs">
       <SubType>Form</SubType>
