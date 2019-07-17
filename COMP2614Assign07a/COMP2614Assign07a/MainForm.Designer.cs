@@ -38,6 +38,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.checkBoxDelete = new System.Windows.Forms.CheckBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.customerViewModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCustomers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.customerViewModelBindingSource)).BeginInit();
@@ -65,7 +66,7 @@
             // labelCreditHoldCountOW
             // 
             this.labelCreditHoldCountOW.AutoSize = true;
-            this.labelCreditHoldCountOW.Location = new System.Drawing.Point(395, 400);
+            this.labelCreditHoldCountOW.Location = new System.Drawing.Point(485, 413);
             this.labelCreditHoldCountOW.Name = "labelCreditHoldCountOW";
             this.labelCreditHoldCountOW.Size = new System.Drawing.Size(35, 13);
             this.labelCreditHoldCountOW.TabIndex = 2;
@@ -74,17 +75,16 @@
             // labelTotalYTDSalesOW
             // 
             this.labelTotalYTDSalesOW.AutoSize = true;
-            this.labelTotalYTDSalesOW.Location = new System.Drawing.Point(523, 400);
+            this.labelTotalYTDSalesOW.Location = new System.Drawing.Point(485, 387);
             this.labelTotalYTDSalesOW.Name = "labelTotalYTDSalesOW";
             this.labelTotalYTDSalesOW.Size = new System.Drawing.Size(35, 13);
             this.labelTotalYTDSalesOW.TabIndex = 3;
             this.labelTotalYTDSalesOW.Text = "label2";
-            this.labelTotalYTDSalesOW.Click += new System.EventHandler(this.LabelTotalYTDSalesOW_Click);
             // 
             // labelCustomerCount
             // 
             this.labelCustomerCount.AutoSize = true;
-            this.labelCustomerCount.Location = new System.Drawing.Point(681, 400);
+            this.labelCustomerCount.Location = new System.Drawing.Point(485, 400);
             this.labelCustomerCount.Name = "labelCustomerCount";
             this.labelCustomerCount.Size = new System.Drawing.Size(35, 13);
             this.labelCustomerCount.TabIndex = 4;
@@ -93,17 +93,16 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(322, 400);
+            this.label1.Location = new System.Drawing.Point(397, 413);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(67, 13);
             this.label1.TabIndex = 5;
             this.label1.Text = "Total on CH:";
-            this.label1.Click += new System.EventHandler(this.Label1_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(454, 400);
+            this.label2.Location = new System.Drawing.Point(397, 387);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(63, 13);
             this.label2.TabIndex = 6;
@@ -112,7 +111,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(593, 400);
+            this.label3.Location = new System.Drawing.Point(397, 400);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(85, 13);
             this.label3.TabIndex = 7;
@@ -122,12 +121,20 @@
             // checkBoxDelete
             // 
             this.checkBoxDelete.AutoSize = true;
-            this.checkBoxDelete.Location = new System.Drawing.Point(840, 400);
+            this.checkBoxDelete.Location = new System.Drawing.Point(763, 400);
             this.checkBoxDelete.Name = "checkBoxDelete";
-            this.checkBoxDelete.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxDelete.Size = new System.Drawing.Size(106, 17);
             this.checkBoxDelete.TabIndex = 8;
+            this.checkBoxDelete.Text = "Confirm Deletion:";
             this.checkBoxDelete.UseVisualStyleBackColor = true;
-            this.checkBoxDelete.CheckedChanged += new System.EventHandler(this.CheckBoxDelete_CheckedChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(791, 400);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(0, 13);
+            this.label4.TabIndex = 9;
             // 
             // customerViewModelBindingSource
             // 
@@ -138,6 +145,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(974, 444);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.checkBoxDelete);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -170,6 +178,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.CheckBox checkBoxDelete;
         private System.Windows.Forms.BindingSource customerViewModelBindingSource;
+        private System.Windows.Forms.Label label4;
     }
 }
 

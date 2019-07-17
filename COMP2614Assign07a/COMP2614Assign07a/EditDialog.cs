@@ -36,12 +36,12 @@ namespace COMP2614Assign07a
 
             catch (SqlException ex)
             {
-                MessageBox.Show(ex.Message, "DB Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show(ex.Message, "DB Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Processing Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show(ex.Message, "Processing Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -56,28 +56,18 @@ namespace COMP2614Assign07a
             maskedTextBoxPostalCode.DataBindings.Add("Text", CustomerVM, "Customer.PostalCode", false, DataSourceUpdateMode.OnValidation, "");
             textBoxNotes.DataBindings.Add("Text", CustomerVM, "Customer.Notes", false, DataSourceUpdateMode.OnValidation, "");
             textBoxYTDSales.DataBindings.Add("Text", CustomerVM, "Customer.YTDSales", true, DataSourceUpdateMode.OnValidation, "0.00", "#,##0.00;(#,##0.00);0.00");
-            checkBoxCreditHold.DataBindings.Add("Checked", CustomerVM, "Customer.CreditHold");
-
-            labelCustomerLegend.Text = string.Empty;
-            labelCustomerData.Text = string.Empty;
-            labelProvince.Text = string.Empty;
+            checkBoxCreditHold.DataBindings.Add("Checked", CustomerVM, "Customer.CreditHold");       
         }
 
      
         private void buttonSave_Click(object sender, EventArgs e)
-        {
-
-            // get the customer from the database using the clientcode
-           
-     
-
+        {              
+  
             int? customerCodeStringLength = CustomerVM.Customer.CustomerCode?.Length;
             int? customerCompanyNameStringLength = CustomerVM.Customer.CompanyName?.Length;
-            int? customerAddressStringLength = CustomerVM.Customer.Address?.Length;
-            int? customerAddress2StringLength = CustomerVM.Customer.Address2?.Length;
+            int? customerAddressStringLength = CustomerVM.Customer.Address?.Length;            
             int? customerCityStringLength = CustomerVM.Customer.City?.Length;
-            int? customerProvinceStringLength = CustomerVM.Customer.Province?.Length;
-            int? customerPostalCodeStringLength = CustomerVM.Customer.PostalCode?.Length;
+            int? customerProvinceStringLength = CustomerVM.Customer.Province?.Length;    
 
             try
             {
@@ -85,30 +75,29 @@ namespace COMP2614Assign07a
                 string regExCustomerCode = @"^[A-Z]{5}$";
                 string customerCode = maskedTextBoxCustomerCode.Text;
 
-
                 if (!Regex.IsMatch(regExCustomerCode, customerCode))
                 {
-                    errorProvider.SetError(buttonSave, "Validation");
+                    errorProvider.SetError(buttonSave, "Not valid");
                 }
 
                 if (customerCodeStringLength.GetValueOrDefault(0) < 5)
                 {
-                    errorProvider.SetError(buttonSave, "Validate");                }
-
-
+                    errorProvider.SetError(buttonSave, "Not valid");
+                }
+                
                 if (customerCompanyNameStringLength <= 0)
                 {
-                    errorProvider.SetError(buttonSave, "Validate");
+                    errorProvider.SetError(buttonSave, "Not valid");
                 }
 
                 if (customerAddressStringLength < 4)
                 {
-                    errorProvider.SetError(buttonSave, "Validate");
+                    errorProvider.SetError(buttonSave, "Not valid");
                 }        
          
                 if (customerCityStringLength < 3)
                 {
-                    errorProvider.SetError(buttonSave, "Validate");
+                    errorProvider.SetError(buttonSave, "Not valid");
                 }
              
                 string regExProvince = @"^[A-Z]{2}$";
@@ -116,12 +105,12 @@ namespace COMP2614Assign07a
 
                 if (!Regex.IsMatch(regExProvince, province))
                 {
-                    errorProvider.SetError(buttonSave, "Validation");
+                    errorProvider.SetError(buttonSave, "Not valid");
                 }
 
                 if (customerProvinceStringLength < 2)
                 {
-                    errorProvider.SetError(buttonSave, "Validate");
+                    errorProvider.SetError(buttonSave, "Not valid");
                 }          
 
                 string regExPostalCode = @"^[ABCEGHJKLMNPRSTVXY][0-9][A-Z]\s?[0-9][A-Z][0-9]$";
@@ -145,25 +134,9 @@ namespace COMP2614Assign07a
                     CustomerRepository.AddCustomer(CustomerVM.Customer);
                     MessageBox.Show($"Customer {CustomerVM.Customer.CustomerCode} has been created.");
                 }
-
+                DialogResult = DialogResult.OK;
+                this.Close();
             }
-
-
-
-            catch (SqlException ex)
-            {
-               // MessageBox.Show(ex.Message, "DB Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            catch (Exception ex)
-            {
-                //MessageBox.Show(ex.Message, "Processing Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-           DialogResult = DialogResult.OK;
-           this.Close();
-
-
         }
 
         private void buttonClose_Click(object sender, EventArgs e)
@@ -176,17 +149,6 @@ namespace COMP2614Assign07a
             CustomerVM.SetDisplayCustomer(new Customer());
             maskedTextBoxCustomerCode.Select();
             maskedTextBoxCustomerCode.SelectAll();
-        }
-
-        private void labelCustomerData_Click(object sender, EventArgs e)
-        {
-
-        }
-
-  
-        private void LabelCustomerLegend_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void ButtonDeleteCustomer_Click_1(object sender, EventArgs e)
@@ -214,21 +176,11 @@ namespace COMP2614Assign07a
             }
             else
             {
-                 CustomerRepository.DeleteProduct(CustomerVM.Customer);
+                CustomerRepository.DeleteProduct(CustomerVM.Customer);
                 MessageBox.Show("You have sucesssfully deleted the customer");
             }
 
             DialogResult = DialogResult.OK;       
-        }
-
-        private void TextBoxCustomerCode_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MaskedTextBox_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
-        {
-
-        }
+        }   
     }
 }

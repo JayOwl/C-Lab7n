@@ -219,22 +219,7 @@ namespace COMP2614Assign07a
             }
         }
 
-        private void LabelTotalYTDSalesOW_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void Label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CheckBoxDelete_CheckedChanged(object sender, EventArgs e)
         {
 
         }
