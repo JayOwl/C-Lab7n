@@ -21,6 +21,11 @@ namespace COMP2614Assign07a
         public MainForm()
         {
             InitializeComponent();
+           CustomerCollection newTotal = CustomerRepository.GetCustomers();
+
+            labelTotalYTDSalesOW.Text = newTotal.TotalYTDSalesOW.ToString();
+            labelCreditHoldCountOW.Text = newTotal.CreditHoldCountOW.ToString();
+            labelCustomerCount.Text = newTotal.CustomerCountOW.ToString();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -37,6 +42,8 @@ namespace COMP2614Assign07a
 
             dataGridViewCustomers.AutoGenerateColumns = false;
             dataGridViewCustomers.DataSource = customerVM.Customers;
+
+
         }
 
         private void setupDataGridView()
@@ -185,10 +192,7 @@ namespace COMP2614Assign07a
             //labelCustomerData.Text = outputData;
         }
 
-        private void Label1_Click(object sender, EventArgs e)
-        {
-
-        }
+   
         private void LabelCustomerLegend_Click(object sender, EventArgs e)
         {
 
@@ -205,6 +209,8 @@ namespace COMP2614Assign07a
             
             EditDialog dialog = new EditDialog();
             dialog.CustomerVM.Customer = customer;
+            dialog.CustomerVM.DeleteBoxChecked = checkBoxDelete.Checked;
+
             if(dialog.ShowDialog() == DialogResult.OK)
             {
                 customerVM = new CustomerViewModel();
@@ -213,5 +219,24 @@ namespace COMP2614Assign07a
             }
         }
 
+        private void LabelTotalYTDSalesOW_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CheckBoxDelete_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -197,7 +197,8 @@ namespace BusinessLibrary.Data
     
         public static CustomerCollection GetCustomers()
         {
-            CustomerCollection customers;
+            CustomerCollection customers = new CustomerCollection();
+
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 string query = $@"SELECT ClientCode, CompanyName, Address1, Address2, City, Province, PostalCode, YTDSales, CreditHold, Notes
@@ -212,7 +213,6 @@ namespace BusinessLibrary.Data
 
                     conn.Open();
 
-                    customers = new CustomerCollection();
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
@@ -333,13 +333,10 @@ namespace BusinessLibrary.Data
                                 Notes = notes
                             });
                         }
-
                     }
-
                 }
-
-            }
-            return customers;
+            }        
+           return customers;
         }
 
 

@@ -34,13 +34,10 @@
             this.checkBoxCreditHold = new System.Windows.Forms.CheckBox();
             this.textBoxNotes = new System.Windows.Forms.TextBox();
             this.textBoxYTDSales = new System.Windows.Forms.TextBox();
-            this.textBoxPostalCode = new System.Windows.Forms.TextBox();
-            this.textBoxProvince = new System.Windows.Forms.TextBox();
             this.textBoxCity = new System.Windows.Forms.TextBox();
             this.textBoxAddress2 = new System.Windows.Forms.TextBox();
             this.textBoxAddress = new System.Windows.Forms.TextBox();
             this.textBoxCompanyName = new System.Windows.Forms.TextBox();
-            this.textBoxCustomerCode = new System.Windows.Forms.TextBox();
             this.labelNotes = new System.Windows.Forms.Label();
             this.labelYTDSales = new System.Windows.Forms.Label();
             this.labelPostalCode = new System.Windows.Forms.Label();
@@ -55,6 +52,9 @@
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonDeleteCustomer = new System.Windows.Forms.Button();
+            this.maskedTextBoxCustomerCode = new System.Windows.Forms.MaskedTextBox();
+            this.maskedTextBoxPostalCode = new System.Windows.Forms.MaskedTextBox();
+            this.maskedTextBoxProvince = new System.Windows.Forms.MaskedTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
@@ -99,20 +99,6 @@
             this.textBoxYTDSales.Size = new System.Drawing.Size(100, 20);
             this.textBoxYTDSales.TabIndex = 41;
             // 
-            // textBoxPostalCode
-            // 
-            this.textBoxPostalCode.Location = new System.Drawing.Point(162, 259);
-            this.textBoxPostalCode.Name = "textBoxPostalCode";
-            this.textBoxPostalCode.Size = new System.Drawing.Size(100, 20);
-            this.textBoxPostalCode.TabIndex = 40;
-            // 
-            // textBoxProvince
-            // 
-            this.textBoxProvince.Location = new System.Drawing.Point(162, 223);
-            this.textBoxProvince.Name = "textBoxProvince";
-            this.textBoxProvince.Size = new System.Drawing.Size(100, 20);
-            this.textBoxProvince.TabIndex = 39;
-            // 
             // textBoxCity
             // 
             this.textBoxCity.Location = new System.Drawing.Point(162, 187);
@@ -140,13 +126,6 @@
             this.textBoxCompanyName.Name = "textBoxCompanyName";
             this.textBoxCompanyName.Size = new System.Drawing.Size(100, 20);
             this.textBoxCompanyName.TabIndex = 35;
-            // 
-            // textBoxCustomerCode
-            // 
-            this.textBoxCustomerCode.Location = new System.Drawing.Point(162, 40);
-            this.textBoxCustomerCode.Name = "textBoxCustomerCode";
-            this.textBoxCustomerCode.Size = new System.Drawing.Size(100, 20);
-            this.textBoxCustomerCode.TabIndex = 34;
             // 
             // labelNotes
             // 
@@ -259,7 +238,7 @@
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
             this.buttonSave.TabIndex = 44;
-            this.buttonSave.Text = "&Save";
+            this.buttonSave.Text = "&OK";
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
@@ -273,11 +252,39 @@
             this.buttonDeleteCustomer.UseVisualStyleBackColor = true;
             this.buttonDeleteCustomer.Click += new System.EventHandler(this.ButtonDeleteCustomer_Click_1);
             // 
+            // maskedTextBoxCustomerCode
+            // 
+            this.maskedTextBoxCustomerCode.Location = new System.Drawing.Point(162, 40);
+            this.maskedTextBoxCustomerCode.Mask = ">LLLLL";
+            this.maskedTextBoxCustomerCode.Name = "maskedTextBoxCustomerCode";
+            this.maskedTextBoxCustomerCode.Size = new System.Drawing.Size(44, 20);
+            this.maskedTextBoxCustomerCode.TabIndex = 52;
+            this.maskedTextBoxCustomerCode.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.MaskedTextBox_MaskInputRejected);
+            // 
+            // maskedTextBoxPostalCode
+            // 
+            this.maskedTextBoxPostalCode.Location = new System.Drawing.Point(162, 259);
+            this.maskedTextBoxPostalCode.Mask = ">L0L 0L0";
+            this.maskedTextBoxPostalCode.Name = "maskedTextBoxPostalCode";
+            this.maskedTextBoxPostalCode.Size = new System.Drawing.Size(57, 20);
+            this.maskedTextBoxPostalCode.TabIndex = 53;
+            // 
+            // maskedTextBoxProvince
+            // 
+            this.maskedTextBoxProvince.Location = new System.Drawing.Point(162, 226);
+            this.maskedTextBoxProvince.Mask = ">LL";
+            this.maskedTextBoxProvince.Name = "maskedTextBoxProvince";
+            this.maskedTextBoxProvince.Size = new System.Drawing.Size(44, 20);
+            this.maskedTextBoxProvince.TabIndex = 54;
+            // 
             // EditDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.maskedTextBoxProvince);
+            this.Controls.Add(this.maskedTextBoxPostalCode);
+            this.Controls.Add(this.maskedTextBoxCustomerCode);
             this.Controls.Add(this.buttonDeleteCustomer);
             this.Controls.Add(this.buttonNewCustomer);
             this.Controls.Add(this.buttonClose);
@@ -287,13 +294,10 @@
             this.Controls.Add(this.checkBoxCreditHold);
             this.Controls.Add(this.textBoxNotes);
             this.Controls.Add(this.textBoxYTDSales);
-            this.Controls.Add(this.textBoxPostalCode);
-            this.Controls.Add(this.textBoxProvince);
             this.Controls.Add(this.textBoxCity);
             this.Controls.Add(this.textBoxAddress2);
             this.Controls.Add(this.textBoxAddress);
             this.Controls.Add(this.textBoxCompanyName);
-            this.Controls.Add(this.textBoxCustomerCode);
             this.Controls.Add(this.labelNotes);
             this.Controls.Add(this.labelYTDSales);
             this.Controls.Add(this.labelPostalCode);
@@ -320,13 +324,10 @@
         private System.Windows.Forms.CheckBox checkBoxCreditHold;
         private System.Windows.Forms.TextBox textBoxNotes;
         private System.Windows.Forms.TextBox textBoxYTDSales;
-        private System.Windows.Forms.TextBox textBoxPostalCode;
-        private System.Windows.Forms.TextBox textBoxProvince;
         private System.Windows.Forms.TextBox textBoxCity;
         private System.Windows.Forms.TextBox textBoxAddress2;
         private System.Windows.Forms.TextBox textBoxAddress;
         private System.Windows.Forms.TextBox textBoxCompanyName;
-        private System.Windows.Forms.TextBox textBoxCustomerCode;
         private System.Windows.Forms.Label labelNotes;
         private System.Windows.Forms.Label labelYTDSales;
         private System.Windows.Forms.Label labelPostalCode;
@@ -341,5 +342,8 @@
         private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button buttonDeleteCustomer;
+        private System.Windows.Forms.MaskedTextBox maskedTextBoxCustomerCode;
+        private System.Windows.Forms.MaskedTextBox maskedTextBoxPostalCode;
+        private System.Windows.Forms.MaskedTextBox maskedTextBoxProvince;
     }
 }

@@ -22,7 +22,10 @@ namespace COMP2614Assign07a
             Customer = new Customer();
         }
 
-
+        public bool DeleteBoxChecked
+        {
+            get; set;
+        }
         public Customer Customer
         {
             get { return customer; }
